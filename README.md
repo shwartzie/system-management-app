@@ -68,3 +68,5 @@ npm test
 
 ### Misc
 (Git, Jest,TypesScript, NodeJS (Express), AWS Cognito Userpool + SNS + IAM, MongoDB + Compass)
+
+# Read the attached Deployment suggestion in the repo, for the following infrastructure ! :)
