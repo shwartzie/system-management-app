@@ -60,13 +60,19 @@ password: a12345
 ``` 
 ###Enjoy access and playing around with the requests for handling projects and tasks!
 
+
+###Test instructions
+```
+cd backend
+``` 
+```
+npm test
+```
+
 ### Back-end
 
 (ExpressTS, MongoDB, Postman, AWS Cognito + IAM + SNS)
 
 
 ### Misc
-
-(Linux-Ubuntu, Bash, Git, Jest,TypesScript, NodeJS)
-
-<img src="frontend/src/assets/readme/linux.png" width="100" hight="150"><img src="frontend/src/assets/readme/ubuntu.png" width="100" hight="150"><img src="frontend/src/assets/readme/terminal-bash.png" width="100" hight="150"><img src="frontend/src/assets/readme/git.png" width="100" hight="150"><img src="frontend/src/assets/readme/jest.png" width="100" hight="150"><img src="frontend/src/assets/readme/ts.png" width="100" hight="150"><img src="frontend/src/assets/readme/nodejs(1).png" width="100" hight="150">
+(Git, Jest,TypesScript, NodeJS, AWS Cognito Userpool + SNS + IAM)
