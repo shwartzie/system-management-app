@@ -67,4 +67,4 @@ npm test
 
 
 ### Misc
-(Git, Jest,TypesScript, NodeJS (Express), AWS Cognito Userpool + SNS + IAM)
+(Git, Jest,TypesScript, NodeJS (Express), AWS Cognito Userpool + SNS + IAM, MongoDB + Compass)
