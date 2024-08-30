@@ -1,11 +1,11 @@
-# system-management-app
+# System-management-app
 Program to manage with authenticated users CRUD operations on Projects and Tasks Using AWS Cognito Userpool
 
 
 Lets start shall we ?
 
 ## Setup Instructions
-Plaese make sure port 3000 is free.
+Please make sure port 3000 is free.
 
 ### Backend
 ```
@@ -49,19 +49,15 @@ password: a12345
 1. Login to the following user which is Guest type
 username: roni
 password: a12345
-
 2. Use MFA Http Request by sending the username and session you have received from login request.
 3. Use MFA code recieved to my phone
 4. Use the access token received after success MFA to access all recources.
-``` 
-```
-
 
 ``` 
-###Enjoy access and playing around with the requests for handling projects and tasks!
+### Enjoy accessing and playing around with the requests for handling projects and tasks!
 
 
-###Test instructions
+## Test instructions
 ```
 cd backend
 ``` 
@@ -69,10 +65,6 @@ cd backend
 npm test
 ```
 
-### Back-end
-
-(ExpressTS, MongoDB, Postman, AWS Cognito + IAM + SNS)
-
 
 ### Misc
-(Git, Jest,TypesScript, NodeJS, AWS Cognito Userpool + SNS + IAM)
+(Git, Jest,TypesScript, NodeJS (Express), AWS Cognito Userpool + SNS + IAM)
