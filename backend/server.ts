@@ -3,7 +3,6 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import authRouter from './routes/auth_routes';
-import usersRouter from './routes/user_routes';
 import http from 'http';
 import { connectDb } from './config/db';
 import express from 'express';
@@ -35,7 +34,6 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use('/api/auth', authRouter);
-app.use('/api/users', usersRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/task', taskRouter);
 

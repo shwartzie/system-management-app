@@ -1,35 +1,49 @@
 import {
-	CognitoIdentityProviderClient,
 	AdminInitiateAuthCommand,
-	AdminRespondToAuthChallengeCommand,
-	RespondToAuthChallengeCommand,
+	AdminInitiateAuthCommandOutput,
+	CognitoIdentityProviderClient,
 	ConfirmForgotPasswordCommand,
-	AdminUpdateUserAttributesCommand,
+	RespondToAuthChallengeCommand,
+	RespondToAuthChallengeCommandOutput,
 	SignUpCommand,
+	SignUpCommandOutput,
 } from '@aws-sdk/client-cognito-identity-provider';
 
 import { cognito } from '../config/aws';
 
-export const confirmResetPassword = async (username) => {
+type LoginResponse = {
+	status: number;
+	accessToken: string;
+	refreshToken: string;
+	expiresIn: number;
+	tokenIssuedAt: number;
+};
+
+type AuthService = {
+	register: (username: string, password: string, email: string, phoneNumber: string) => Promise<SignUpCommandOutput>;
+	cognito: CognitoIdentityProviderClient;
+	login: (username: string, password: string) => Promise<LoginResponse>;
+};
+
+export const confirmResetPassword = async (username: string) => {
 	try {
-		const command = new ConfirmForgotPasswordCommand({
+		const command: ConfirmForgotPasswordCommand = new ConfirmForgotPasswordCommand({
 			ClientId: process.env.CLIENT_ID!,
 			Username: username,
 			ConfirmationCode: '020819',
 			Password: 'a12345',
 		});
 
-		const res = await authService.cognito.send(command);
+		await authService.cognito.send(command);
 	} catch (err) {
 		console.error('Error confirming password reset:', err);
 	}
 };
 
-export const authService = {
+export const authService: AuthService = {
 	register,
 	cognito,
 	login,
-	respondMFA,
 };
 
 async function register(username: string, password: string, email: string, phoneNumber: string) {
@@ -47,7 +61,7 @@ async function register(username: string, password: string, email: string, phone
 	return await cognito.send(command);
 }
 
-async function login(username: string, password: string) {
+async function login(username: string, password: string): Promise<LoginResponse> {
 	const initiateAuthCommand = new AdminInitiateAuthCommand({
 		UserPoolId: process.env.USER_POOL_ID!,
 		ClientId: process.env.CLIENT_ID!,
@@ -57,8 +71,9 @@ async function login(username: string, password: string) {
 			PASSWORD: password,
 		},
 	});
-	const initiateAuthResponse = await cognito.send(initiateAuthCommand);
+	const initiateAuthResponse: AdminInitiateAuthCommandOutput = await cognito.send(initiateAuthCommand);
 	const { Session, ChallengeParameters, ChallengeName } = initiateAuthResponse;
+	const tokenIssuedAt: number = Math.floor(Date.now() / 1000);
 
 	if (ChallengeName === 'NEW_PASSWORD_REQUIRED') {
 		const challengeResponses = {
@@ -75,17 +90,22 @@ async function login(username: string, password: string) {
 			}
 		}
 
-		const respondToAuthChallengeCommand = new RespondToAuthChallengeCommand({
+		const respondToAuthChallengeCommand: RespondToAuthChallengeCommand = new RespondToAuthChallengeCommand({
 			ChallengeName,
 			ClientId: process.env.CLIENT_ID!,
 			ChallengeResponses: challengeResponses,
 			Session: Session!,
 		});
 
-		const response = await cognito.send(respondToAuthChallengeCommand);
-		return { status: response.$metadata.httpStatusCode, response };
+		const response: RespondToAuthChallengeCommandOutput = await cognito.send(respondToAuthChallengeCommand);
+		return {
+			status: response.$metadata.httpStatusCode,
+			accessToken: response.AuthenticationResult.AccessToken,
+			refreshToken: response.AuthenticationResult.RefreshToken,
+			expiresIn: response.AuthenticationResult.ExpiresIn,
+			tokenIssuedAt,
+		};
 	}
-	const tokenIssuedAt: number = Math.floor(Date.now() / 1000);
 	return {
 		status: initiateAuthResponse.$metadata.httpStatusCode,
 		accessToken: initiateAuthResponse.AuthenticationResult.AccessToken,

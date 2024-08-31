@@ -1,8 +1,7 @@
-import request from 'supertest';
 import express from 'express';
+import request from 'supertest';
+import { Task } from '../../common/types';
 import { projectController } from '../project_controller';
-import { projectService } from '../../services/project_service';
-import { connectDb } from '../../config/db';
 
 const app = express();
 app.use(express.json());
@@ -13,7 +12,7 @@ app.put('/projects/:id', projectController.updateProject);
 app.delete('/projects/:id', projectController.deleteProject);
 
 describe('Project Controller', () => {
-	let mockProject;
+	let mockProject:{ name: string, description: string, tasks: Task[] };
 	beforeEach(async () => {
 		mockProject = { name: 'Test Project', description: 'Test Description', tasks: [] };
 		jest.resetAllMocks();
@@ -25,7 +24,6 @@ describe('Project Controller', () => {
 		const response = await request(app)
 			.post('/projects')
 			.send({ name: 'Test Project', description: 'Test Description' });
-		console.log('response:', response.body);
 		expect(response.status).toBe(201);
 		expect(response.body.name).toEqual(mockProject.name);
 	});
