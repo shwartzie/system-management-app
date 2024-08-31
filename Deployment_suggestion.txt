@@ -1,0 +1,8 @@
+For the frontend part, Using Next.js for pages that are static such as login, signup and MFA you can use SSG.
+However for the dynamic pages which most of them are, you should use SSR, since the data needs to be up to date!
+
+For the server, we can use tools that can create an efficient load balancer such as Kubernetes for example.
+Load balancer will improve the performance since it handles huge amounts of requests by navigating it efficiently.
+
+Working on the project thought me about the features AWS provides, For exmaple I'd like to add that we can add AWS CloudWatch to monitor the traffic,
+in order to have the ability to change for example the way the load balancer works, meaning which algorithm can be used to be more efficient.
