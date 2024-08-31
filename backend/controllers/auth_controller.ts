@@ -2,7 +2,6 @@ import express from 'express';
 require('dotenv').config();
 import { authService } from '../services/auth_service';
 import { SignUpCommandOutput } from '@aws-sdk/client-cognito-identity-provider';
-// Register New user.
 export const register = async (req: express.Request, res: express.Response): Promise<express.Response> => {
 	try {
 		const { email, password, username, phoneNumber } = req.body;
@@ -10,8 +9,8 @@ export const register = async (req: express.Request, res: express.Response): Pro
 			return res.status(400).json({ message: 'Missing required fields' });
 		}
 
-		const response: Promise<SignUpCommandOutput> = authService.register(email, password, username, phoneNumber);
-		return res.status(201).json({ message: 'User created successfully' });
+		const response: SignUpCommandOutput = await authService.register(email, password, username, phoneNumber);
+		return res.status(response.$metadata.httpStatusCode).json({ message: 'User created successfully' });
 	} catch (err) {
 		// Ensure proper error handling
 		console.error('Error during registration:', err);

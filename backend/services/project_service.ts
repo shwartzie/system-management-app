@@ -9,8 +9,9 @@ export const projectService = {
 	removeTaskFromProject,
 };
 
-async function getAllProjects(page: number = 1, limit: number = 10, cursor?: string): Promise<Project[]> {
-	if (cursor) {
+async function getAllProjects(offset: number = 1, limit: number = 10, cursor?: string): Promise<Project[]> {
+	
+	if (cursor !== "" && cursor ) {
 		// Cursor-based pagination
 		return await ProjectModel.find({ _id: { $gt: cursor } })
 			.populate('tasks')
@@ -18,8 +19,7 @@ async function getAllProjects(page: number = 1, limit: number = 10, cursor?: str
 			.exec();
 	} else {
 		// Offset-based pagination
-		const skip = (page - 1) * limit;
-		return await ProjectModel.find().populate('tasks').skip(skip).limit(limit).exec();
+		return await ProjectModel.find().populate('tasks').skip(offset).limit(limit).exec();
 	}
 }
 

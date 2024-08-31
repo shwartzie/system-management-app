@@ -25,8 +25,8 @@ async function createProject(req: Request, res: Response): Promise<Response> {
 // Get all projects
 async function getAllProjects(req: Request, res: Response): Promise<Response> {
 	try {
-		const page: number | undefined = req.query.page ? +(req.query.page as string) : undefined;
-		const limit: number = +(req.query.limit as string);
+		const offset: number | undefined = +req.query.offset || undefined;
+		const limit: number | undefined = +req.query.limit || undefined;
 		const cursor: string | undefined = req.query.cursor as string | undefined;
 
 		let projects: Project[];
@@ -35,7 +35,8 @@ async function getAllProjects(req: Request, res: Response): Promise<Response> {
 			projects = await projectService.getAllProjects(undefined, limit, cursor);
 		} else {
 			// Offset-based pagination
-			projects = await projectService.getAllProjects(page, limit);
+			projects = await projectService.getAllProjects(offset, limit);
+			console.log('projects.length:',projects.length);
 		}
 
 		return res.status(200).json(projects);
@@ -76,7 +77,7 @@ async function updateProject(req: Request, res: Response): Promise<Response> {
 // Delete a project
 async function deleteProject(req: Request, res: Response): Promise<Response> {
 	try {
-		const projectId:string = req.params.id;
+		const projectId: string = req.params.id;
 		const deletedProject: Project = await projectService.deleteProject(projectId);
 		if (!deletedProject) {
 			return res.status(404).json({ message: 'Project not found' });
