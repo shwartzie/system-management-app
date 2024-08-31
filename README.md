@@ -27,6 +27,9 @@ npm start
 ### Download Postman file -
 ### [Postman file](https://drive.google.com/file/d/1cQaUQNHom5VvyVCM6gHp_mXn4Q0F1QPf/view?usp=sharing)
 
+### Collection should look like this
+![image](https://github.com/user-attachments/assets/d0b02cc8-2080-4024-9a84-18d8f11153df)
+
 
 
 ### Follow the steps:
@@ -43,7 +46,12 @@ password: a12345
 
 3. Response headers will be filled with four main properties. 
 4. Add for each endpoint you are going to test all 4 properties (examples included in each endpoint, only update the data)
-``` 
+```
+
+ ### Login Response Example
+![image](https://github.com/user-attachments/assets/046cf894-0121-47b6-afc3-7e6d8ec1a047)
+
+
 ### Enjoy accessing and playing around with the requests for handling projects and tasks!
 
 
