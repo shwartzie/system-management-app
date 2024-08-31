@@ -28,17 +28,26 @@ npm start
 ### [Postman file](https://drive.google.com/file/d/1cQaUQNHom5VvyVCM6gHp_mXn4Q0F1QPf/view?usp=sharing)
 
 
+
 ### Follow the steps:
 
 ```
 1. Open postman
-2. Login to the following user which is Admin role
+2. Login to one of the following users which have different roles.
+### guest can only send GET request however admin can do both!
 username: admin
 password: a12345
+
+username: guest
+password: a12345
+
 3. Response headers will be filled with four main properties. 
 4. Add for each endpoint you are going to test all 4 properties (examples included in each endpoint, only update the data)
 ``` 
 ### Enjoy accessing and playing around with the requests for handling projects and tasks!
+
+
+### NOTICE: I had an idea to create a second database for tests only. However the second database costs money so imagine the data that is being created while running the tests, are supposed to be created in a test database idealy. I created integration tests too since they are mocking the real flow of the program since that's what I really care about, rather than looking for small detailes nested inside the flow.
 
 
 ## Test instructions
@@ -46,7 +55,7 @@ password: a12345
 cd backend
 ``` 
 ```
-npm test
+npm run test
 ```
 
 
