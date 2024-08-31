@@ -36,7 +36,6 @@ async function getAllProjects(req: Request, res: Response): Promise<Response> {
 		} else {
 			// Offset-based pagination
 			projects = await projectService.getAllProjects(offset, limit);
-			console.log('projects.length:',projects.length);
 		}
 
 		return res.status(200).json(projects);

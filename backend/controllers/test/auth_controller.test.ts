@@ -1,10 +1,6 @@
 import request from 'supertest';
-import express from 'express';
-import { login } from '../auth_controller';
+import { app } from '../../jest.setup';
 require('dotenv').config();
-const app = express();
-app.use(express.json());
-app.post('/login', login);
 
 describe('Login Controller', () => {
 	beforeEach(async () => {
