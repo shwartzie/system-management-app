@@ -25,34 +25,18 @@ npm start
 
 ## Links
 ### Download Postman file -
-### [Postman file]()
+### [Postman file](https://drive.google.com/file/d/1cQaUQNHom5VvyVCM6gHp_mXn4Q0F1QPf/view?usp=sharing)
 
 
 ### Follow the steps:
 
 ```
-1. Register user for guest role (need to setup verification in SNS for your phone_number to continue)
-2. Login to it
-3. Use MFA Http Request by sending the username and session you have received from login request.
-4. Use the access token received after success MFA to access all recources.
-``` 
-```
-1. Login to the following user which is Admin type
-username: roni1
+1. Open postman
+2. Login to the following user which is Admin role
+username: admin
 password: a12345
-2. Use MFA Http Request by sending the username and session you have received from login request.
-3. Use Mfa code recieved to my phone
-4. Use the access token received after success MFA to access all recources.
-``` 
-```
-
-1. Login to the following user which is Guest type
-username: roni
-password: a12345
-2. Use MFA Http Request by sending the username and session you have received from login request.
-3. Use MFA code recieved to my phone
-4. Use the access token received after success MFA to access all recources.
-
+3. Response headers will be filled with four main properties. 
+4. Add for each endpoint you are going to test all 4 properties (examples included in each endpoint, only update the data)
 ``` 
 ### Enjoy accessing and playing around with the requests for handling projects and tasks!
 
@@ -67,6 +51,6 @@ npm test
 
 
 ### Misc
-(Git, Jest,TypesScript, NodeJS (Express), AWS Cognito Userpool + SNS + IAM, MongoDB + Compass)
+(Git, Jest, TypesScript, NodeJS (Express), AWS Cognito Userpool + IAM, MongoDB + Compass)
 
 # Read the attached Deployment suggestion in the repo, for the following infrastructure ! :)
