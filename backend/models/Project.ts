@@ -16,7 +16,6 @@ const projectSchema = new Schema<Project>({
 	tasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }],
 });
 
-// Create the Project model
 const ProjectModel = mongoose.model<Project>('Project', projectSchema);
 
 export { ProjectModel };
